@@ -1,5 +1,7 @@
 # Skillslint
 
+Browse our docs [https://adamczyk.ovh/docs/skillslint](https://adamczyk.ovh/docs/skillslint).
+
 ## Rationale
 
 Agents skills created via Anthropics [skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) are generally good and reliable. Nevertheless You can also create or edit them manually since they are just `SKILL.md` files.
