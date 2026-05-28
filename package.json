@@ -1,6 +1,6 @@
 {
   "name": "@ladamczyk/skillslint",
-  "version": "3.2.5",
+  "version": "4.0.0",
   "description": "Linter for agents skills",
   "keywords": [
     "cli",
@@ -34,7 +34,7 @@
     "postinstall": "qoq --warmup",
     "prepare": "husky",
     "publish:full": "run-s husky:pre-push publish:release",
-    "publish:release": "npx --package semantic-release --package @semantic-release/changelog --package @semantic-release/git -y semantic-release",
+    "publish:release": "npx --package semantic-release --package @semantic-release/changelog --package @semantic-release/git --package @semantic-release/npm -y semantic-release",
     "qoq:check": "qoq --check",
     "qoq:fix": "qoq --fix",
     "sort:packages:json": "npx -y sort-package-json 'package.json'",

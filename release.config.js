@@ -20,6 +20,7 @@ export default {
       },
     ],
     '@semantic-release/github',
+    '@semantic-release/npm'
   ],
   ci: false,
 };
