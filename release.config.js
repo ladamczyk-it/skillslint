@@ -1,0 +1,21 @@
+export default {
+  branches: ['master'],
+  plugins: [
+    [
+      '@semantic-release/commit-analyzer',
+      {
+        preset: 'conventionalcommits',
+      },
+    ],
+    '@semantic-release/release-notes-generator',
+    '@semantic-release/changelog',
+    [
+      '@semantic-release/git',
+      {
+        assets: ['CHANGELOG.md', 'package.json', 'package-lock.json'],
+      },
+    ],
+    '@semantic-release/github',
+  ],
+  ci: false,
+};

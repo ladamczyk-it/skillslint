@@ -1,0 +1,19 @@
+{
+  "plugins": {
+    "@textlint/markdown": {
+      "extensions": [".md"]
+    },
+    "@textlint/text": {
+      "extensions": [".md"]
+    }
+  },
+  "rules": {
+    "common-misspellings": true,
+    "write-good": {
+      "weasel": false,
+      "passive": false,
+      "adverb": false,
+      "tooWordy": false
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# dependencies
+**/node_modules
+
+# coverage
+**/coverage
+
+# build
+**/bin
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# logs
+npm-debug.log*
+
+# skills
+.agents/skills
