@@ -19,8 +19,8 @@ export default {
         assets: ['CHANGELOG.md', 'package.json', 'package-lock.json'],
       },
     ],
-    '@semantic-release/github',
     '@semantic-release/npm',
+    '@semantic-release/github',
   ],
   ci: false,
 };
