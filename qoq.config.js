@@ -22,6 +22,7 @@ export default {
       '@rollup/*',
       'rollup-*',
       'esbuild',
+      'dotenv',
       // package specific
       '@textlint/*',
       'textlint*',
