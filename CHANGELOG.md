@@ -4,6 +4,14 @@
 ### Bug Fixes
 
 * add npm release ([43276aa](https://github.com/ladamczyk-it/skillslint/commit/43276aae98c5b4615bf200a1923fed8a5ad048e7))
+* linter ([363aae9](https://github.com/ladamczyk-it/skillslint/commit/363aae9aa21f1a26efe3b7b7b758a2ff7ae2e73b))
+
+## [4.0.1](https://github.com/ladamczyk-it/skillslint/compare/v4.0.0...v4.0.1) (2026-05-28)
+
+
+### Bug Fixes
+
+* add npm release ([43276aa](https://github.com/ladamczyk-it/skillslint/commit/43276aae98c5b4615bf200a1923fed8a5ad048e7))
 
 # [4.0.0](https://github.com/ladamczyk-it/skillslint/compare/v3.2.5...v4.0.0) (2026-05-28)
 
