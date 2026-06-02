@@ -10,7 +10,7 @@ To avoid common mistakes, this CLI runs predefined [textlint](https://textlint.o
 
 ## Usage
 
-You can install package locally (eg for [QoQ](https://www.npmjs.com/package/@saashub/qoq-cli) usage) or run it directly:
+You can install package locally (eg for [QoQ](https://www.npmjs.com/package/@ladamczyk/qoq-cli) usage) or run it directly:
 
 ```bash
 npx @ladamczyk/skillslint

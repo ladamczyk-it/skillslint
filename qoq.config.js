@@ -1,4 +1,4 @@
-import { getNoRestrictedImportsPaths } from '@saashub/qoq-eslint-v9-js';
+import { getNoRestrictedImportsPaths } from '@ladamczyk/qoq-eslint-v9-js';
 
 const rules = {
   'no-restricted-imports': [
@@ -31,7 +31,7 @@ export default {
   },
   eslint: [
     {
-      template: '@saashub/qoq-eslint-v9-ts',
+      template: 'qoq-eslint-v9-ts',
       files: ['src/**/*.ts'],
       rules,
     },

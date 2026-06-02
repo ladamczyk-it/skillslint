@@ -2,7 +2,7 @@
 
 import { readdirSync } from 'fs';
 
-import { EExitCode, executeCommand, resolveCwdRelativePath } from '@saashub/qoq-utils';
+import { EExitCode, executeCommand, resolveCwdRelativePath } from '@ladamczyk/qoq-utils';
 import { assessQuality, formatScoreBar, getScoreColor } from 'agent-skills-cli';
 import cac from 'cac';
 import c from 'picocolors';
