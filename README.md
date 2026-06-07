@@ -1,4 +1,11 @@
-# Skillslint
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ladamczyk-it/skillslint/master/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ladamczyk-it/skillslint/master/logo.svg">
+    <img alt="" src="https://raw.githubusercontent.com/ladamczyk-it/skillslint/master/logo.svg" height="36" align="top">
+  </picture>
+  &nbsp;Skillslint
+</h1>
 
 Browse our docs [https://adamczyk.ovh/docs/skillslint](https://adamczyk.ovh/docs/skillslint).
 
