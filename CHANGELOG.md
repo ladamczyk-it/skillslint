@@ -1,3 +1,11 @@
+## [4.0.8](https://github.com/ladamczyk-it/skillslint/compare/v4.0.7...v4.0.8) (2026-06-08)
+
+
+### Bug Fixes
+
+* add logo ([0f91383](https://github.com/ladamczyk-it/skillslint/commit/0f9138379335e4cc865c16543b1463d47b8dd4ab))
+* remove of prepare script + bump packages ([68fc954](https://github.com/ladamczyk-it/skillslint/commit/68fc954fcad51d5193189e78195b928acc66bdf3))
+
 ## [4.0.7](https://github.com/ladamczyk-it/skillslint/compare/v4.0.6...v4.0.7) (2026-06-02)
 
 
