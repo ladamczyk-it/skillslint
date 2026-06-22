@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/ladamczyk-it/skillslint/compare/v4.0.8...v4.1.0) (2026-06-22)
+
+
+### Features
+
+* expose javascript API aside CLI ([5dbca31](https://github.com/ladamczyk-it/skillslint/commit/5dbca318004d4340a308e33308eaa1617ad89536))
+
 ## [4.0.8](https://github.com/ladamczyk-it/skillslint/compare/v4.0.7...v4.0.8) (2026-06-08)
 
 
