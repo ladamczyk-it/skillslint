@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/ladamczyk-it/skillslint/compare/v4.1.0...v4.1.1) (2026-06-22)
+
+
+### Bug Fixes
+
+* move formater to separate method and export it ([f2581ba](https://github.com/ladamczyk-it/skillslint/commit/f2581ba09b2a24bf6e24aaa5244e344ab295851b))
+
 # [4.1.0](https://github.com/ladamczyk-it/skillslint/compare/v4.0.8...v4.1.0) (2026-06-22)
 
 
