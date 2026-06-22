@@ -1,35 +1,13 @@
 #!/usr/bin/env node
 
 import { EExitCode } from '@ladamczyk/qoq-utils';
-import { formatScoreBar, getScoreColor } from 'agent-skills-cli';
 import cac from 'cac';
-import c from 'picocolors';
-import { loadFixerFormatter, loadLinterFormatter } from 'textlint';
 
-import { hasTextlintErrors } from './helpers/textlint.ts';
+import { format } from './format.ts';
 import { DEFAULT_THRESHOLD } from './helpers/threshold.ts';
 import { DEFAULT_PATH, lint } from './lint.ts';
 
-import type {
-  ILintOptions,
-  TTextlintFixResult,
-  TTextlintLintResult,
-  TTextlintResults,
-} from './types.ts';
-
-const BAR_WIDTH = 25;
-
-const formatTextlint = async (textlint: TTextlintResults, fixed: boolean): Promise<string> => {
-  if (fixed) {
-    const formatter = await loadFixerFormatter({ formatterName: 'stylish' });
-
-    return formatter.format(textlint as TTextlintFixResult[]);
-  }
-
-  const formatter = await loadLinterFormatter({ formatterName: 'stylish' });
-
-  return formatter.format(textlint as TTextlintLintResult[]);
-};
+import type { ILintOptions } from './types.ts';
 
 const cli = cac('skillslint');
 
@@ -51,38 +29,9 @@ cli
   .action(async (options: ILintOptions) => {
     const result = await lint(options);
 
-    const output = await formatTextlint(result.textlint, result.fixed);
-    if (output.trim()) {
-      process.stdout.write(`${output}\n`);
-    }
+    process.stdout.write(await format(result));
 
-    if (result.fixed && hasTextlintErrors(result.textlint)) {
-      process.stdout.write(c.red("Can't perform automatic fix!\n\n"));
-    }
-
-    result.skills.forEach(({ name, scores }) => {
-      process.stdout.write(c.gray(`\n/${name}\n`));
-
-      (['overall', 'structure', 'clarity', 'specificity', 'advanced'] as const).forEach(
-        (dimension) => {
-          const label = `${dimension[0]?.toUpperCase()}${dimension.slice(1)}:`.padEnd(13);
-          const color = c[getScoreColor(scores[dimension])];
-
-          process.stdout.write(color(`${label}${formatScoreBar(scores[dimension], BAR_WIDTH)}\n`));
-        }
-      );
-    });
-
-    if (result.skills.some((skill) => !skill.passed)) {
-      process.stdout.write(c.red(`At least one skill doesn't meet required threshold!\n`));
-    }
-
-    if (result.passed) {
-      process.stdout.write(c.green('\nAll good!\n'));
-      process.exit(EExitCode.OK);
-    }
-
-    process.exit(EExitCode.ERROR);
+    process.exit(result.passed ? EExitCode.OK : EExitCode.ERROR);
   });
 
 cli.help();

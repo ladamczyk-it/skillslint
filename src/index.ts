@@ -1,3 +1,4 @@
+export { format } from './format.ts';
 export { DEFAULT_PATH, lint } from './lint.ts';
 export { buildThreshold, DEFAULT_THRESHOLD, failsThreshold } from './helpers/threshold.ts';
 export { hasTextlintErrors, runTextlint } from './helpers/textlint.ts';
