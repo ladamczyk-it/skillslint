@@ -14,7 +14,7 @@ export default {
     sources: ['.'],
   },
   knip: {
-    entry: './src/index.{js,ts}',
+    entry: ['./src/index.{js,ts}', './src/cli.{js,ts}'],
     project: './src/**/*.{js,ts}',
     ignore: ['**/rollup.*.js', '**/vitest.config.js', 'eslint.config.js', 'qoq.config.js'],
     ignoreDependencies: [

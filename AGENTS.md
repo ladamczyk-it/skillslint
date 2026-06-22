@@ -1,6 +1,6 @@
 # @ladamczyk/skillslint — Agent Context
 
-CLI linter for Claude Code agent skill documentation. Runs two checks: markdown prose quality via textlint, and structured quality scoring via `agent-skills-cli`.
+Linter for agent skill documentation. Runs two checks: markdown prose quality via textlint, and structured quality scoring via `agent-skills-cli`. Ships both a CLI (default) and a JavaScript API.
 
 ## Command
 
@@ -21,6 +21,23 @@ skillslint [options]
 | `-i, --ignored [names]` | —          | Skill directory names to skip                                                    |
 
 Exits with code `1` if any skill fails to meet its threshold or if textlint finds unfixable issues.
+
+## Programmatic API
+
+The package also exports a JavaScript API (ESM). The `lint` function runs the same two checks and returns structured results without printing or exiting:
+
+```js
+import { lint } from '@ladamczyk/skillslint';
+
+const result = await lint({ path: './skills', threshold: 70, ignored: ['wip-skill'] });
+
+result.passed; // boolean — every skill met its threshold and textlint found no errors
+result.fixed; // boolean — whether `fix` was requested (fixes are written to disk)
+result.skills; // Array<{ name, scores: { overall, structure, clarity, specificity, advanced }, passed }>
+result.textlint; // raw textlint results for the linted markdown files
+```
+
+`lint(options)` accepts the same options as the CLI flags (`path`, `fix`, `ignored`, `threshold`, `overall`, `structure`, `clarity`, `specificity`, `advanced`). Additional named exports: `DEFAULT_PATH`, `DEFAULT_THRESHOLD`, `buildThreshold`, `failsThreshold`, `runTextlint`, `hasTextlintErrors`, and the TypeScript types (`ILintOptions`, `ILintResult`, `IScores`, `ISkillScore`, `IThreshold`).
 
 ## Skills directory structure
 

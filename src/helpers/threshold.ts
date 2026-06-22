@@ -1,8 +1,8 @@
-import type { IExecuteOptions, IScores, IThreshold } from '../types.ts';
+import type { ILintOptions, IScores, IThreshold } from '../types.ts';
 
 export const DEFAULT_THRESHOLD = 70;
 
-export const buildThreshold = (options: IExecuteOptions): IThreshold => {
+export const buildThreshold = (options: ILintOptions): IThreshold => {
   const {
     threshold: optionsThreshold,
     overall,

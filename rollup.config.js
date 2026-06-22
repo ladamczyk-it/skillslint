@@ -1,28 +1,18 @@
 import { readFileSync } from 'fs';
 import { builtinModules } from 'module';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import esbuild from 'rollup-plugin-esbuild';
-import json from '@rollup/plugin-json';
-import commonjs from '@rollup/plugin-commonjs';
-import terser from '@rollup/plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 
 const pkg = JSON.parse(readFileSync('./package.json'));
 
 const sourceDir = './src';
-const outputDir = './bin';
+const outputDir = './lib';
 const input = {
-  skillslint: `${sourceDir}/index.ts`,
+  index: `${sourceDir}/index.ts`,
 };
 const plugins = [
-  nodeResolve({
-    preferBuiltins: true,
+  typescript({
+    exclude: ['**/*.test.{js,ts}', '**/cli.ts'],
   }),
-  json(),
-  commonjs(),
-  esbuild({
-    target: 'node22',
-  }),
-  terser(),
 ];
 
 const external = [...builtinModules, ...Object.keys(pkg.dependencies)];
@@ -34,7 +24,13 @@ export default {
   output: [
     {
       dir: outputDir,
-      entryFileNames: '[name].js',
+      format: 'esm',
+      entryFileNames: '[name].mjs',
+    },
+    {
+      dir: outputDir,
+      format: 'cjs',
+      entryFileNames: '[name].cjs',
     },
   ],
 };

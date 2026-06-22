@@ -13,17 +13,21 @@ npm run qoq:fix        # auto-fix lint and formatting issues
 
 ## Architecture
 
-This is a single-entry CLI (`src/index.ts`) bundled by Rollup into `bin/skillslint.js`. All `dependencies` remain **external** at runtime (not bundled); only `devDependencies` tooling is used at build time.
+This package ships **two entry points**, each built by its own Rollup config (the build runs Rollup only — no standalone `tsc`). All `dependencies` stay external (not bundled); only `devDependencies` tooling is used at build time:
 
-**Runtime flow:**
+- `src/cli.ts` → `bin/cli.js` — the **CLI** (`package.json` `bin`, shebang). Built by `rollup.bin.js` (esbuild + terser into one self-contained bundle). Parses options with `cac` and renders output; it is a thin presentation layer over `lint()`.
+- `src/index.ts` → `lib/index.mjs` + `lib/index.cjs` + `lib/src/*.d.ts` — the **JavaScript API** (`package.json` `main`/`module`/`types`/`exports`). Built by `rollup.config.js` via `@rollup/plugin-typescript` (dual CJS/ESM output plus declarations). Exposes `lint()` plus helpers and types.
 
-1. `cac` parses CLI options into `IExecuteOptions` (`src/types.ts`)
-2. `textlint` runs against `<path>/**/*.md` using the bundled `.textlintrc.json` (resolved via `src/helpers/paths.ts`, which handles both installed-package and `npx` invocation)
-3. `agent-skills-cli.assessQuality` scores each skill subdirectory and results are compared against the threshold options
+**Core API (`src/lint.ts`):** `lint(options: ILintOptions): Promise<ILintResult>` runs both checks and returns structured results (no printing, no `process.exit`):
+
+1. `runTextlint` (`src/helpers/textlint.ts`) lints `<path>/**/*.md` via the **textlint programmatic API** (`createLinter` + `loadTextlintrc`) using the bundled `.textlintrc.json` (resolved via `src/helpers/paths.ts`, which handles both installed-package and `npx` invocation). With `fix`, it writes each result's `output` back to disk (the API computes fixes but does not persist them). Missing target files are treated as "nothing to lint" rather than throwing.
+2. `agent-skills-cli.assessQuality` scores each skill subdirectory; scores are compared against the threshold options.
+
+The legacy `executeCommand('textlint', …)` shell-out has been removed in favour of the textlint API.
 
 **Path resolution (`src/helpers/paths.ts`):** `resolveCliRelativePath` finds the CLI package root via `getPackageInfo` (for installed use) or falls back to `process.cwd()` (for `npx`). This is how the bundled `.textlintrc.json` is located at runtime regardless of invocation method.
 
-**Build output:** Rollup bundles to a single `bin/skillslint.js` with a shebang, minified by terser. The `files` array in `package.json` controls what gets published: `bin/`, `.textlintrc.json`, and `AGENTS.md`.
+**Build output:** `npm run build` runs `rollup -c rollup.bin.js` (the CLI bundle, minified by terser) then `rollup -c` (the library CJS/ESM bundles + `.d.ts` declarations via `@rollup/plugin-typescript`). The `files` array in `package.json` controls what gets published: `bin/`, `lib/`, `.textlintrc.json`, and `AGENTS.md`. Both `bin/` and `lib/` are git/prettier-ignored build artifacts.
 
 ## Key conventions
 

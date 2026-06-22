@@ -2,11 +2,11 @@ import { resolve } from 'path';
 
 import { getPackageInfo, getRelativePath } from '@ladamczyk/qoq-utils';
 
-import pkg from '../../package.json';
+const PACKAGE_NAME = '@ladamczyk/skillslint';
 
 const getCliPackagePath = (): string => {
   try {
-    const { rootPath } = getPackageInfo(pkg.name) ?? {};
+    const { rootPath } = getPackageInfo(PACKAGE_NAME) ?? {};
 
     return rootPath;
   } catch {
