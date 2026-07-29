@@ -1,14 +1,3 @@
-import { getNoRestrictedImportsPaths } from '@ladamczyk/qoq-eslint-v9-js';
-
-const rules = {
-  'no-restricted-imports': [
-    1,
-    {
-      paths: getNoRestrictedImportsPaths(),
-    },
-  ],
-};
-
 export default {
   prettier: {
     sources: ['.'],
@@ -33,7 +22,6 @@ export default {
     {
       template: 'qoq-eslint-v9-ts',
       files: ['src/**/*.ts'],
-      rules,
     },
   ],
 };
