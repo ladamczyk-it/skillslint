@@ -1,3 +1,10 @@
+## [4.1.3](https://github.com/ladamczyk-it/skillslint/compare/v4.1.2...v4.1.3) (2026-08-12)
+
+
+### Bug Fixes
+
+* packages bump + migration to rolldown ([d46721e](https://github.com/ladamczyk-it/skillslint/commit/d46721e5718207d5478c0bb6324eb25f19caefe2))
+
 ## [4.1.2](https://github.com/ladamczyk-it/skillslint/compare/v4.1.1...v4.1.2) (2026-07-29)
 
 
