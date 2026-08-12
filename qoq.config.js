@@ -5,12 +5,10 @@ export default {
   knip: {
     entry: ['./src/index.{js,ts}', './src/cli.{js,ts}'],
     project: './src/**/*.{js,ts}',
-    ignore: ['**/rollup.*.js', '**/vitest.config.js', 'eslint.config.js', 'qoq.config.js'],
+    ignore: ['**/rolldown.config.js', '**/vitest.config.js', 'eslint.config.js', 'qoq.config.js'],
     ignoreDependencies: [
       // build specific
-      '@rollup/*',
-      'rollup-*',
-      'esbuild',
+      'rolldown',
       'dotenv',
       // package specific
       '@textlint/*',
