@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/ladamczyk-it/skillslint/compare/v4.1.3...v4.2.0) (2026-08-16)
+
+
+### Features
+
+* add stats + bump ([3701418](https://github.com/ladamczyk-it/skillslint/commit/3701418e9e395eeec4c4cffb0f108c7696b0cf30))
+
 ## [4.1.3](https://github.com/ladamczyk-it/skillslint/compare/v4.1.2...v4.1.3) (2026-08-12)
 
 

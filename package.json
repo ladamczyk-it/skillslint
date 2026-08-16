@@ -1,6 +1,6 @@
 {
   "name": "@ladamczyk/skillslint",
-  "version": "4.1.3",
+  "version": "4.2.0",
   "description": "Linter for agents skills",
   "keywords": [
     "cli",
