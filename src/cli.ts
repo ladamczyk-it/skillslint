@@ -4,6 +4,7 @@ import { EExitCode } from '@ladamczyk/qoq-utils';
 import cac from 'cac';
 
 import { format } from './format.ts';
+import { resolveConsent } from './helpers/stats.ts';
 import { DEFAULT_THRESHOLD } from './helpers/threshold.ts';
 import { DEFAULT_PATH, lint } from './lint.ts';
 
@@ -27,7 +28,10 @@ cli
   .option('--specificity <threshold>', 'Specificity required threshold')
   .option('--advanced <threshold>', 'Advanced required threshold')
   .action(async (options: ILintOptions) => {
-    const result = await lint(options);
+    // The CLI is the one caller that can ask, so it is the one that answers.
+    // Unanswered collapses to `false` only here, at the call: consent is still
+    // absent in the config file, so the next interactive run asks again.
+    const result = await lint({ ...options, stats: (await resolveConsent()) ?? false });
 
     process.stdout.write(await format(result));
 

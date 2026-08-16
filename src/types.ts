@@ -29,6 +29,12 @@ export interface ILintOptions extends IThreshold {
   path?: string;
   threshold?: number;
   ignored?: string[];
+  // Anonymous usage stats: `true` sends, `false` doesn't. Required and strictly
+  // boolean — a library can't prompt, so the embedding caller is the only one
+  // who can hold the user's consent, and it has to state it rather than let an
+  // omission decide. "Never asked" is not a value here: it's a state of the
+  // CLI's consent file, and it reaches this boundary as `false`.
+  stats: boolean;
 }
 
 export interface ISkillScore {

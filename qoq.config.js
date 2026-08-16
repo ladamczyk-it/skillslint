@@ -1,4 +1,5 @@
 export default {
+  stats: true,
   prettier: {
     sources: ['.'],
   },

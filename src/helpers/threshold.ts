@@ -2,7 +2,11 @@ import type { ILintOptions, IScores, IThreshold } from '../types.ts';
 
 export const DEFAULT_THRESHOLD = 70;
 
-export const buildThreshold = (options: ILintOptions): IThreshold => {
+// Only the threshold half of ILintOptions: taking the whole thing would drag
+// the required `stats` consent into a function that has nothing to do with it.
+export const buildThreshold = (
+  options: IThreshold & Pick<ILintOptions, 'threshold'>
+): IThreshold => {
   const {
     threshold: optionsThreshold,
     overall,
