@@ -47,7 +47,7 @@ result.textlint; // raw textlint results for the linted markdown files
 
 ## Anonymous usage stats
 
-Opt-in, off until a human says yes. A counted run posts one constant to `https://stats.adamczyk.ovh` and nothing else — every run, every flag combination, byte for byte the same body:
+Opt-in, off until a human says yes. A counted run posts one constant to `https://adamczyk.ovh/stats` and nothing else — every run, every flag combination, byte for byte the same body:
 
 ```jsonc
 { "tool": "skillslint", "options": [] } // `options` is always empty

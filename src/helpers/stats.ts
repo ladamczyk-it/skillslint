@@ -5,7 +5,7 @@ import { createInterface } from 'readline/promises';
 
 import c from 'picocolors';
 
-const STATS_URL = 'https://stats.adamczyk.ovh';
+const STATS_URL = 'https://adamczyk.ovh/stats';
 const STATS_TIMEOUT_MS = 2000;
 
 // Machine-wide, not per-project: skillslint has no config file of its own, and
