@@ -1,3 +1,10 @@
+## [4.2.1](https://github.com/ladamczyk-it/skillslint/compare/v4.2.0...v4.2.1) (2026-08-19)
+
+
+### Bug Fixes
+
+* packages bump ([ca86dd3](https://github.com/ladamczyk-it/skillslint/commit/ca86dd3dc1243c2914070391bbf6f7a966fb0f31))
+
 # [4.2.0](https://github.com/ladamczyk-it/skillslint/compare/v4.1.3...v4.2.0) (2026-08-16)
 
 
