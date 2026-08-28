@@ -75,6 +75,9 @@ describe('resolveConsent', () => {
 });
 
 describe('sendStats', () => {
+  // Transport — both endpoints, the shared deadline, the swallowed failures —
+  // is qoq-utils' and tested there. All this binds is the tool name, and that
+  // `options` stays empty.
   it('posts the tool name and an always-empty options array', async () => {
     const fetchMock = vi.fn().mockResolvedValue(new Response(null, { status: 204 }));
 
@@ -85,11 +88,5 @@ describe('sendStats', () => {
     const [, init] = fetchMock.mock.calls[0] as [string, { body: string }];
 
     expect(JSON.parse(init.body)).toEqual({ tool: 'skillslint', options: [] });
-  });
-
-  it('swallows a dead endpoint', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('ECONNREFUSED')));
-
-    await expect(sendStats()).resolves.toBeUndefined();
   });
 });

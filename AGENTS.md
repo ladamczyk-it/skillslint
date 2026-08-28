@@ -47,11 +47,13 @@ result.textlint; // raw textlint results for the linted markdown files
 
 ## Anonymous usage stats
 
-Opt-in, off until a human says yes. A counted run posts one constant to `https://adamczyk.ovh/stats` and nothing else — every run, every flag combination, byte for byte the same body:
+Opt-in, off until a human says yes. A counted run posts one constant to `https://stats.adamczyk.ovh` and nothing else — every run, every flag combination, byte for byte the same body:
 
 ```jsonc
 { "tool": "skillslint", "options": [] } // `options` is always empty
 ```
+
+Where an outbound POST never leaves the network, the same run counts as a plain image GET instead — `https://adamczyk.ovh/img/stats/pixel.png?tool=skillslint` — which carries the same single value and nothing more.
 
 So the only thing a send carries is that a run happened. Never sent: skills, file names, paths, scores, findings, thresholds, the flags you typed, project or package names, or anything identifying the user or machine. Sends are fire-and-forget with a 2s timeout; a failure is swallowed and never affects the exit code.
 

@@ -3,10 +3,8 @@ import { homedir } from 'os';
 import { dirname, join } from 'path';
 import { createInterface } from 'readline/promises';
 
+import { sendStats as send, STATS_URL, PIXEL_URL } from '@ladamczyk/qoq-utils';
 import c from 'picocolors';
-
-const STATS_URL = 'https://adamczyk.ovh/stats';
-const STATS_TIMEOUT_MS = 2000;
 
 // Machine-wide, not per-project: skillslint has no config file of its own, and
 // asking once per checkout would be one prompt per repo. XDG_CONFIG_HOME wins
@@ -43,6 +41,7 @@ const askConsent = async (): Promise<boolean> => {
       c.bold('\nSkillslint usage stats\n'),
       `Send a count of skillslint runs to ${STATS_URL}? Each run posts one thing:\n`,
       `  • the tool name — always the literal ${c.cyan('"skillslint"')}\n`,
+      c.gray(`Blocked POST? The same values go to ${PIXEL_URL} as a GET.\n`),
       c.gray(
         'Never sent: your skills, file names, paths, scores, findings, thresholds,\n' +
           'the flags you typed, project or package names, and nothing identifying\n' +
@@ -84,21 +83,11 @@ export const resolveConsent = async (file: string = CONSENT_FILE): Promise<boole
   return stats;
 };
 
-// Fire-and-forget: callers don't await it, and a dead or slow endpoint must never
-// surface as an error or hold a run up — hence the swallowed catch and the 2s cap.
+// Transport — both endpoints, the shared 2s cap, the swallowed failures — is
+// qoq-utils', so a URL changes in one place for every tool that counts runs; all
+// that is bound here is the name.
 //
-// `options` is always empty and takes no argument: a run count is the whole
-// question this answers, and the sink requires the key. Nothing about how the
-// run was invoked goes out, so there is nothing to sanitize.
-export const sendStats = async (): Promise<void> => {
-  try {
-    await fetch(STATS_URL, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ tool: 'skillslint', options: [] }),
-      signal: AbortSignal.timeout(STATS_TIMEOUT_MS),
-    });
-  } catch {
-    // Stats are best-effort; a failed send is not the user's problem.
-  }
-};
+// No `options` argument, and none passed: a run count is the whole question this
+// answers. Nothing about how the run was invoked goes out, so there is nothing
+// to sanitize.
+export const sendStats = async (): Promise<void> => send('skillslint');
