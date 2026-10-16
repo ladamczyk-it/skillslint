@@ -1,8 +1,8 @@
 <h1>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ladamczyk-it/skillslint/master/logo-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ladamczyk-it/skillslint/master/logo.svg">
-    <img alt="" src="https://raw.githubusercontent.com/ladamczyk-it/skillslint/master/logo.svg" height="36" align="top">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ladamczyk-it/skillslint/main/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ladamczyk-it/skillslint/main/logo.svg">
+    <img alt="" src="https://raw.githubusercontent.com/ladamczyk-it/skillslint/main/logo.svg" height="36" align="top">
   </picture>
   &nbsp;Skillslint
 </h1>
