@@ -11,9 +11,9 @@
 # logs
 npm-debug.log*
 
-# skills
-.agents/skills
-
 # env
 .env.local
 .npmrc
+
+.claude/*
+plans
