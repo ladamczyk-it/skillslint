@@ -1,12 +1,25 @@
+import { websiteEslint } from './qoq.website.js';
 export default {
   stats: true,
   prettier: {
     sources: ['.'],
   },
   knip: {
-    entry: ['./src/index.{js,ts}', './src/cli.{js,ts}'],
-    project: './src/**/*.{js,ts}',
-    ignore: ['**/rolldown.config.js', '**/vitest.config.js', 'eslint.config.js', 'qoq.config.js'],
+    workspaces: {
+      '.': {
+        entry: ['./src/index.{js,ts}', './src/cli.{js,ts}'],
+        project: './src/**/*.{js,ts}',
+      },
+      // Knip's Docusaurus plugin rewrites the Theme's scoped name to a package that does not exist
+      website: { ignoreDependencies: ['@internal/docusaurus-theme-docusaurus-theme'] },
+    },
+    ignore: [
+      '**/rolldown.config.js',
+      '**/vitest.config.js',
+      'eslint.config.js',
+      'qoq.config.js',
+      'qoq.website.js',
+    ],
     ignoreDependencies: [
       // build specific
       'rolldown',
@@ -22,5 +35,6 @@ export default {
       template: 'qoq-eslint-v9-ts',
       files: ['src/**/*.ts'],
     },
+    ...websiteEslint,
   ],
 };
