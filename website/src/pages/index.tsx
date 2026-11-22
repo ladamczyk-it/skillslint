@@ -7,6 +7,8 @@ import styles from '@internal/docusaurus-theme/hero.module.css';
 import CodeBlock from '@theme/CodeBlock';
 import Layout from '@theme/Layout';
 
+import { SkillAnimation } from '../components/SkillAnimation';
+
 import pageStyles from './index.module.css';
 
 const FEATURES = [
@@ -54,6 +56,7 @@ const Home = (): ReactNode => {
             </div>
           </div>
         </header>
+        <SkillAnimation />
         <ul className={`${styles.features} ${pageStyles.features}`}>
           {FEATURES.map(({ title, description }) => (
             <li key={title} className={styles.feature}>
