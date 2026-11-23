@@ -5,7 +5,6 @@ import packageJson from '../package.json' with { type: 'json' };
 import type { ThemeConfig } from '@docusaurus/preset-classic';
 
 const LOGO = 'img/logo.svg';
-const LOGO_DARK = 'img/logo-dark.svg';
 
 const config = createConfig({
   tool: 'skillslint',
@@ -25,7 +24,7 @@ export default {
   favicon: LOGO,
   themeConfig: {
     ...themeConfig,
-    navbar: { ...themeConfig.navbar, logo: { alt: config.title, src: LOGO, srcDark: LOGO_DARK } },
+    navbar: { ...themeConfig.navbar, logo: { alt: config.title, src: LOGO } },
     // shortcut: links the author in the Theme's copyright text; move into the Theme so every site gets it
     footer: {
       ...themeConfig.footer,
