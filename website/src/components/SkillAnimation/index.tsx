@@ -58,7 +58,7 @@ export const SkillAnimation = (): ReactNode => (
           <div className={styles.terminal}>
             <div className={styles.prompt}>$ npx skillslint</div>
             <div className={styles.finding}>
-              <span className={styles.position}>3:41</span>
+              <span className={styles.position}>3:33</span>
               <span className={styles.bad}>✖</span>
               <span className={styles.message}>
                 This is a commonly misspelled word. Correct it to receive
