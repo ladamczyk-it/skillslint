@@ -1,0 +1,49 @@
+---
+title: Introduction
+sidebar_position: 1
+description: 'CLI linter for Claude Code agent skills: textlint prose checks plus structured quality scoring for your SKILL.md files.'
+---
+
+import styles from '@internal/docusaurus-theme/github-button.module.css';
+
+<a
+  href="https://github.com/ladamczyk-it/skillslint"
+  target="_blank"
+  rel="noopener noreferrer"
+  className={styles.githubButton}
+>
+  <span aria-hidden="true" className={styles.githubButtonIcon} />
+  <span>GitHub</span>
+</a>
+
+# Skillslint
+
+CLI linter for agents skills. Runs two checks: markdown prose quality via [textlint](https://textlint.org/docs/getting-started) and structured quality scoring via [agent-skills-cli](https://github.com/Karanjot786/agent-skills-cli).
+
+Skills created via Anthropic's [skill-creator](https://github.com/anthropic/skills/tree/main/skills/skill-creator) are generally good and reliable, but you can also create or edit them manually — they are just `SKILL.md` files. This tool guards against common mistakes in both cases.
+
+> Content is verified against **`@ladamczyk/skillslint` v4.2.6**. See [`CHANGELOG.md`](https://github.com/ladamczyk-it/skillslint/blob/main/CHANGELOG.md) to verify accuracy.
+
+## Installation
+
+Run directly without installing:
+
+```bash
+npx @ladamczyk/skillslint
+```
+
+Or install locally (e.g. for use inside a [QoQ](https://www.npmjs.com/package/@ladamczyk/qoq-cli) pipeline):
+
+```bash
+npm install --save-dev @ladamczyk/skillslint
+```
+
+List all available options:
+
+```bash
+npx @ladamczyk/skillslint -h
+```
+
+## Changelog
+
+Release history lives in the repo — [Releases](https://github.com/ladamczyk-it/skillslint/releases) and [`CHANGELOG.md`](https://github.com/ladamczyk-it/skillslint/blob/main/CHANGELOG.md).

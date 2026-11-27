@@ -1,0 +1,335 @@
+/*
+ * One 12s loop: SKILL.md lines appear → the misspelling is flagged → textlint's finding and the
+ * failing scores print → the word is fixed, scores rise past 70 → pass. Base styles are the
+ * final "fixed" frame, so reduced motion just switches animations off.
+ */
+
+.wrapper {
+  --loop: 12s;
+  --h: 1.7em;
+  --ok: oklch(0.75 0.16 150);
+  --warn: oklch(0.82 0.15 90);
+  --bad: oklch(0.7 0.19 20);
+  --tw-font-size: clamp(0.68rem, 2.4vw, 0.85rem);
+  --tw-pad-bottom: 2.5rem;
+}
+
+.body {
+  display: grid;
+}
+
+/* ── SKILL.md ──────────────────────────────────────────────────────────── */
+
+.file {
+  padding: 0.75rem 0.9rem;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  min-height: var(--h);
+  white-space: pre-wrap;
+  animation: rowIn var(--loop) calc(var(--i) * 0.12s) infinite both;
+}
+
+.word {
+  display: inline-grid;
+}
+
+.typo,
+.fixed {
+  grid-area: 1 / 1;
+  padding: 0 0.15em;
+  border-radius: 0.2rem;
+}
+
+.typo {
+  opacity: 0;
+  animation: typo var(--loop) infinite both;
+}
+
+.fixed {
+  color: var(--ok);
+  animation: fixed var(--loop) infinite both;
+}
+
+/* ── Terminal ──────────────────────────────────────────────────────────── */
+
+.prompt,
+.skill,
+.position,
+.ruleId {
+  color: var(--muted);
+}
+
+.prompt {
+  min-height: var(--h);
+  animation: rowIn var(--loop) 0.6s infinite both;
+}
+
+.finding {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.75em;
+  min-height: var(--h);
+  opacity: 0;
+  animation: finding var(--loop) infinite both;
+}
+
+.bad {
+  color: var(--bad);
+}
+
+.skill,
+.score {
+  min-height: var(--h);
+  animation: scoreIn var(--loop) infinite both;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  flex: none;
+  width: 13ch;
+}
+
+.track {
+  position: relative;
+  flex: 0 1 25ch;
+  height: 0.6em;
+  border-radius: 0.3em;
+  background: oklch(1 0 0 / 10%);
+}
+
+.fill {
+  display: block;
+  width: calc(var(--pass) * 1%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--pass-color);
+  animation: fill var(--loop) infinite both;
+}
+
+.threshold {
+  position: absolute;
+  top: -0.25em;
+  bottom: -0.25em;
+  left: calc(var(--threshold) * 1%);
+  width: 2px;
+  background: var(--cv-color-near-white);
+}
+
+.value {
+  display: inline-grid;
+  flex: none;
+  margin-left: 1ch;
+}
+
+.failValue,
+.passValue {
+  grid-area: 1 / 1;
+}
+
+.failValue {
+  opacity: 0;
+  color: var(--fail-color);
+  animation: failValue var(--loop) infinite both;
+}
+
+.passValue {
+  color: var(--pass-color);
+  animation: passValue var(--loop) infinite both;
+}
+
+.verdict {
+  display: grid;
+  min-height: var(--h);
+  margin-top: 0.4rem;
+}
+
+.fail,
+.pass {
+  grid-area: 1 / 1;
+}
+
+.fail {
+  opacity: 0;
+  color: var(--bad);
+  animation: fail var(--loop) infinite both;
+}
+
+.pass {
+  color: var(--ok);
+  animation: pass var(--loop) infinite both;
+}
+
+/* ── Keyframes (percentages of --loop) ─────────────────────────────────── */
+
+@keyframes rowIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  5%,
+  92% {
+    opacity: 1;
+    transform: none;
+  }
+  97%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes typo {
+  0%,
+  18% {
+    opacity: 1;
+    background: transparent;
+  }
+  20%,
+  60% {
+    opacity: 1;
+    background: oklch(0.7 0.19 20 / 30%);
+    color: var(--bad);
+  }
+  62%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fixed {
+  0%,
+  62% {
+    opacity: 0;
+  }
+  64%,
+  92% {
+    opacity: 1;
+  }
+  97%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes finding {
+  0%,
+  22% {
+    opacity: 0;
+  }
+  24%,
+  60% {
+    opacity: 1;
+  }
+  62%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scoreIn {
+  0%,
+  28% {
+    opacity: 0;
+  }
+  30%,
+  92% {
+    opacity: 1;
+  }
+  97%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fill {
+  0%,
+  30% {
+    width: 0;
+    background: var(--fail-color);
+  }
+  36%,
+  62% {
+    width: calc(var(--fail) * 1%);
+    background: var(--fail-color);
+  }
+  68%,
+  100% {
+    width: calc(var(--pass) * 1%);
+    background: var(--pass-color);
+  }
+}
+
+@keyframes failValue {
+  0%,
+  34% {
+    opacity: 0;
+  }
+  36%,
+  62% {
+    opacity: 1;
+  }
+  64%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes passValue {
+  0%,
+  64% {
+    opacity: 0;
+  }
+  66%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fail {
+  0%,
+  40% {
+    opacity: 0;
+  }
+  42%,
+  62% {
+    opacity: 1;
+  }
+  64%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pass {
+  0%,
+  68% {
+    opacity: 0;
+  }
+  70%,
+  92% {
+    opacity: 1;
+  }
+  97%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Side by side on desktop, so the hero, the animation and the three boxes share one screen. */
+@media screen and (min-width: 997px) {
+  .body {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+
+  .terminal {
+    border-top: none;
+    border-left: 1px solid oklch(1 0 0 / 8%);
+  }
+}
