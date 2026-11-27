@@ -55,6 +55,6 @@ Never sent: your skills, file names, paths, scores, findings, thresholds, the fl
 
 ## Last 12 months usage statistics (>=4.2.0)
 
-Regenerated on each release, for daily updated numbers click on chart or visit [https://adamczyk.ovh/docs/skillslint#usage-statistics](https://adamczyk.ovh/docs/skillslint#usage-statistics).
+Regenerated on each release, for daily updated numbers click on chart or visit [skillslint.adamczyk.ovh/docs/usage-statistics](https://skillslint.adamczyk.ovh/docs/usage-statistics).
 
 [![Last 12 months usage statistics](https://adamczyk.ovh/img/stats/skillslint.png?date=2026-08-19)](https://adamczyk.ovh/img/stats/skillslint.png)
