@@ -1,7 +1,18 @@
 ---
-title: Introduction
+title: 'Lint and score Agent Skills (SKILL.md)'
+sidebar_label: 'Introduction'
 sidebar_position: 1
-description: 'CLI linter for Claude Code agent skills: textlint prose checks plus structured quality scoring for your SKILL.md files.'
+description: 'Lint Agent Skills such as Claude Code skills before your agents run them: prose checks plus quality scores per SKILL.md, with thresholds that fail CI.'
+keywords:
+  [
+    skill.md linter,
+    agent skills,
+    claude code skills,
+    skill quality,
+    prompt linting,
+    textlint,
+    ai agents,
+  ]
 ---
 
 import styles from '@internal/docusaurus-theme/github-button.module.css';
@@ -18,11 +29,19 @@ import styles from '@internal/docusaurus-theme/github-button.module.css';
 
 # Skillslint
 
-CLI linter for agents skills. Runs two checks: markdown prose quality via [textlint](https://textlint.org/docs/getting-started) and structured quality scoring via [agent-skills-cli](https://github.com/Karanjot786/agent-skills-cli).
-
-Skills created via Anthropic's [skill-creator](https://github.com/anthropic/skills/tree/main/skills/skill-creator) are generally good and reliable, but you can also create or edit them manually — they are just `SKILL.md` files. This tool guards against common mistakes in both cases.
+Skillslint lints [Agent Skills](https://github.com/anthropics/skills), the `SKILL.md` folders that agents such as Claude Code load as instructions. It runs two checks in one command: prose quality with [textlint](https://textlint.org/docs/getting-started), and a 0–100 quality score per skill from [agent-skills-cli](https://github.com/Karanjot786/agent-skills-cli). Any skill below the floors you set fails the run with exit code `1`.
 
 > Content is verified against **`@ladamczyk/skillslint` v4.2.6**. See [`CHANGELOG.md`](https://github.com/ladamczyk-it/skillslint/blob/main/CHANGELOG.md) to verify accuracy.
+
+## Why
+
+Skills are prompts your agents run unattended, so a vague, misspelled or badly structured one fails silently: the agent just does worse. Skills made with Anthropic's [skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) are generally good, but skills are also written and edited by hand, and more and more often by agents themselves. Skillslint catches the common mistakes in both cases, locally and in CI.
+
+```bash
+$ npx @ladamczyk/skillslint --path .claude/skills
+```
+
+For every skill it prints the textlint findings, then a score bar for overall, structure, clarity, specificity and advanced use, and finally whether every skill met its floor.
 
 ## Installation
 
@@ -32,18 +51,21 @@ Run directly without installing:
 npx @ladamczyk/skillslint
 ```
 
-Or install locally (e.g. for use inside a [QoQ](https://www.npmjs.com/package/@ladamczyk/qoq-cli) pipeline):
+Or add it as a dev dependency, for CI or a [qoq](./qoq.md) pipeline:
 
 ```bash
 npm install --save-dev @ladamczyk/skillslint
 ```
 
-List all available options:
+It needs Node `^22.22.2`, `^24.15.0` or `>=26` and npm 10 or later. List all options with `npx @ladamczyk/skillslint -h`.
 
-```bash
-npx @ladamczyk/skillslint -h
-```
+## Next steps
+
+- [Skills directory](./skills-directory.md): where skills live and what gets checked.
+- [Scoring categories](./scoring.md) and [Command line](./cli.md): set the floors.
+- [AI agents and CI](./ai-agents-and-ci.md): use it as a gate, with an `AGENTS.md` snippet.
+- [qoq integration](./qoq.md): run it inside `qoq --check`.
 
 ## Changelog
 
-Release history lives in the repo — [Releases](https://github.com/ladamczyk-it/skillslint/releases) and [`CHANGELOG.md`](https://github.com/ladamczyk-it/skillslint/blob/main/CHANGELOG.md).
+Release history lives in the repo — [`CHANGELOG.md`](https://github.com/ladamczyk-it/skillslint/blob/main/CHANGELOG.md).
