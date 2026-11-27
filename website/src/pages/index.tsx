@@ -1,8 +1,14 @@
 import type { ReactNode } from 'react';
 
+import Head from '@docusaurus/Head';
 import { HomePage } from '@internal/docusaurus-theme/HomePage';
 
 import { SkillAnimation } from '../components/SkillAnimation';
+
+const TITLE = 'Skillslint: lint and score Agent Skills (SKILL.md)';
+
+const DESCRIPTION =
+  'Lint Agent Skills such as Claude Code skills before your agents run them: textlint prose checks and quality scores per SKILL.md, with floors that fail CI.';
 
 const FEATURES = [
   {
@@ -16,9 +22,9 @@ const FEATURES = [
       'Hold every skill to an overall floor or to per-category floors; anything below exits 1, so CI fails before a weak skill ships.',
   },
   {
-    title: 'CLI or API',
+    title: 'Built for CI and AI agents',
     description:
-      'Run it with npx, in CI or inside a QoQ pipeline, or call lint() from your own tooling and get structured results back.',
+      'Run it in CI, after an agent writes a skill, or inside qoq; call lint() to get per-skill scores back as structured results.',
   },
 ];
 
@@ -31,6 +37,12 @@ const Home = (): ReactNode => (
     install="npm install --save-dev @ladamczyk/skillslint"
     opener={OPENER}
   >
+    <Head>
+      <title>{TITLE}</title>
+      <meta content={DESCRIPTION} name="description" />
+      <meta content={TITLE} property="og:title" />
+      <meta content={DESCRIPTION} property="og:description" />
+    </Head>
     <SkillAnimation />
   </HomePage>
 );

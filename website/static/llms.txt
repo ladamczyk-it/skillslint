@@ -1,0 +1,37 @@
+# Skillslint
+
+> Skillslint (@ladamczyk/skillslint) is a CLI and JavaScript API that lints Agent Skills, the SKILL.md folders agents such as Claude Code load as instructions. It runs textlint prose checks and gives each skill 0-100 quality scores (overall, structure, clarity, specificity, advanced) from agent-skills-cli, and fails with exit code 1 when a skill is below the floors you set. It is an optional blocking check inside qoq.
+
+Install and run: `npx @ladamczyk/skillslint`, or `npm install --save-dev @ladamczyk/skillslint`. Needs Node ^22.22.2, ^24.15.0 or >=26 and npm 10+. There is no config file; everything is a CLI flag or a `lint()` option.
+
+Layout: each direct subdirectory of `--path` (default `./skills`, resolved from the current directory) is one skill and is scored as a whole; textlint checks every `.md` file under `--path` at any depth, not only SKILL.md. For Claude Code project skills use `--path .claude/skills`.
+
+CLI options: `-p, --path <dir>`; `-t, --threshold <n>` (default 70, the overall floor, used only when no per-category flag is set); `--overall`, `--structure`, `--clarity`, `--specificity`, `--advanced` (per-category floors that replace --threshold); `-f, --fix` (textlint autofix, written to disk); `-i, --ignored [names]` (skill folders to leave out of scoring; textlint still checks their files); `-h`.
+
+Exit codes: 0 no textlint error and every skill meets its floors; 1 otherwise (with --fix, only errors left after fixing count). Output is text only (textlint stylish output, a score bar per skill, a verdict); there is no --json flag.
+
+Textlint rules bundled: common-misspellings and write-good with weasel, passive, adverb and tooWordy turned off; Markdown and plain-text plugins both read each .md file.
+
+JavaScript API (ESM only, TypeScript types included): `lint({ path?, threshold?, overall?, structure?, clarity?, specificity?, advanced?, fix?, ignored?, stats })` resolves to `{ passed, fixed, skills: [{ name, scores: { overall, structure, clarity, specificity, advanced }, passed }], textlint }`; `stats` is a required boolean and the API never prompts. `format(result)` renders the CLI output. Also `buildThreshold`, `failsThreshold`, `runTextlint`, `hasTextlintErrors`, `DEFAULT_PATH`, `DEFAULT_THRESHOLD` and their types.
+
+qoq: enable with `skillslint: { path }` in qoq.config.js (off without it). A failing skill fails `qoq --check`; `qoq --fix` forwards --fix; staged runs skip it when no staged file is under path; `--skip-skillslint` skips it; `--json` writes skillslint-report.json `{ passed, fixed, skills, textlint }`. qoq currently forwards only path, so the default overall floor of 70 applies there.
+
+Usage statistics: opt-in; the answer is stored in `~/.config/skillslint.json` (or `$XDG_CONFIG_HOME/skillslint.json`). CI and piped runs are never prompted and are counted only when `stats: true` is already stored; only the tool name is sent.
+
+## Docs
+
+- [Lint and score Agent Skills (SKILL.md)](https://skillslint.adamczyk.ovh/docs/): what it does, why and how to install it
+- [CLI options, thresholds and exit codes](https://skillslint.adamczyk.ovh/docs/cli): every flag and what exit code 1 means
+- [Skills directory layout](https://skillslint.adamczyk.ovh/docs/skills-directory): how skills are found and which files are checked
+- [Skill quality scores and thresholds](https://skillslint.adamczyk.ovh/docs/scoring): the five scores and how floors apply
+- [Prose rules for skill files](https://skillslint.adamczyk.ovh/docs/textlint-rules): bundled textlint rules and --fix
+- [JavaScript API](https://skillslint.adamczyk.ovh/docs/javascript-api): lint(), format() and helpers
+- [Skill quality gate for AI agents and CI](https://skillslint.adamczyk.ovh/docs/ai-agents-and-ci): contract, CI example and an AGENTS.md snippet
+- [qoq integration](https://skillslint.adamczyk.ovh/docs/qoq): enabling it in qoq --check, the JSON report and current limits
+
+## Optional
+
+- [Usage statistics](https://skillslint.adamczyk.ovh/docs/usage-statistics): the opt-in prompt and exactly what is sent
+- [GitHub repository](https://github.com/ladamczyk-it/skillslint): source, issues and CHANGELOG.md
+- [npm package](https://www.npmjs.com/package/@ladamczyk/skillslint): @ladamczyk/skillslint
+- [qoq](https://qoq.adamczyk.ovh/): the JavaScript/TypeScript quality suite that can run skillslint

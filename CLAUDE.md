@@ -16,7 +16,7 @@ npm run qoq:fix        # auto-fix lint and formatting issues
 This package ships **two entry points**, built by a single unified Rolldown config (`rolldown.config.js`). All `dependencies` stay external (not bundled); only `devDependencies` tooling is used at build time:
 
 - `src/cli.ts` → `bin/cli.js` — the **CLI** (`package.json` `bin`, shebang). Built by `rolldown.config.js` (minified into one self-contained bundle). Parses options with `cac` and renders output; it is a thin presentation layer over `lint()`.
-- `src/index.ts` → `lib/index.mjs` + `lib/index.cjs` + `lib/src/*.d.ts` — the **JavaScript API** (`package.json` `main`/`module`/`types`/`exports`). Built by `rolldown.config.js` (dual CJS/ESM output) with TypeScript declarations emitted via `tsc --emitDeclarationOnly`. Exposes `lint()` plus helpers and types.
+- `src/index.ts` → `lib/index.js` + `lib/src/*.d.ts` — the **JavaScript API** (`package.json` `main`/`types`/`exports`). Built by `rolldown.config.js` (ESM only) with TypeScript declarations emitted via `tsc --emitDeclarationOnly`. Exposes `lint()` plus helpers and types.
 
 **Core API (`src/lint.ts`):** `lint(options: ILintOptions): Promise<ILintResult>` runs both checks and returns structured results (no printing, no `process.exit`):
 
@@ -29,7 +29,7 @@ The legacy `executeCommand('textlint', …)` shell-out has been removed in favou
 
 **Path resolution (`src/helpers/paths.ts`):** `resolveCliRelativePath` finds the CLI package root via `getPackageInfo` (for installed use) or falls back to `process.cwd()` (for `npx`). This is how the bundled `.textlintrc.json` is located at runtime regardless of invocation method.
 
-**Build output:** `npm run build` runs `rolldown -c` (the CLI and library CJS/ESM bundles) followed by `tsc --emitDeclarationOnly` (`.d.ts` declarations). The `files` array in `package.json` controls what gets published: `bin/`, `lib/`, `.textlintrc.json`, and `AGENTS.md`. Both `bin/` and `lib/` are git/prettier-ignored build artifacts.
+**Build output:** `npm run build` runs `rolldown -c` (the CLI bundle and the ESM library) followed by `tsc --emitDeclarationOnly` (`.d.ts` declarations). The `files` array in `package.json` controls what gets published: `bin/`, `lib/`, `.textlintrc.json`, and `AGENTS.md`. Both `bin/` and `lib/` are git/prettier-ignored build artifacts.
 
 ## Key conventions
 

@@ -20,7 +20,7 @@ skillslint [options]
 | `-f, --fix`             | —          | Attempt auto-fix via textlint                                                    |
 | `-i, --ignored [names]` | —          | Skill directory names to skip                                                    |
 
-Exits with code `1` if any skill fails to meet its threshold or if textlint finds unfixable issues.
+Exits with code `1` if any skill fails to meet its threshold or if textlint reports an error that is still there after the run (with `--fix`, after fixing).
 
 ## Programmatic API
 
@@ -65,7 +65,7 @@ So the only thing a send carries is that a run happened. Never sent: skills, fil
   | `{ "stats": false }` | denied      | nothing sent, never asked again               |
   | no key / no file     | never asked | nothing sent, asked again on the next TTY run |
 
-  Edit or delete the file to change the answer; deleting it returns to "never asked". Non-interactive runs — `CI=true`, a pipe, a subprocess — are never prompted, never counted, and write nothing, so they leave the question open rather than answering it for the user.
+  Edit or delete the file to change the answer; deleting it returns to "never asked". Non-interactive runs — `CI=true`, a pipe, a subprocess — are never prompted and write nothing, so they leave the question open rather than answering it for the user. While no answer is stored they are never counted; once `{ "stats": true }` is stored, they are counted too.
 
 - **API** — never prompts, never reads that file, and has no default. `stats: boolean` is a **required** option on `lint()`: the caller holds its own user's consent, so it must pass `true` or `false` outright. `false` sends nothing.
 
@@ -76,8 +76,11 @@ Each subdirectory under `--path` is treated as one skill:
 ```
 skills/
   my-skill/
-    SKILL.md     # the skill document linted by textlint and scored
+    SKILL.md     # the skill document
+    *.md         # every .md file under --path is checked by textlint
 ```
+
+The whole skill folder is passed to the scorer.
 
 ## Scoring categories
 
@@ -92,4 +95,4 @@ skills/
 ## Textlint rules (bundled `.textlintrc.json`)
 
 - `common-misspellings` — catches common spelling errors
-- `write-good` — passive voice and wordiness checks (weasel words, adverbs, and "too wordy" disabled)
+- `write-good` — prose readability checks, with `weasel`, `passive`, `adverb` and `tooWordy` disabled

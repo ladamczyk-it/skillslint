@@ -1,10 +1,12 @@
 ---
-title: JavaScript API
+title: 'JavaScript API: lint() and format()'
+sidebar_label: 'JavaScript API'
 sidebar_position: 6
-description: lint(), format() and the other exports of the JavaScript API.
+description: 'Run the skill checks from Node: lint() options and result with per-skill scores, format() for the CLI output, and the threshold and textlint helpers.'
+keywords: [skillslint api, skill lint node, agent skills api, typescript, lint result]
 ---
 
-Alongside the CLI the package exports an ESM/CJS API. `lint` runs the same two checks and returns structured results without printing or exiting; `format` turns a result into the console output the CLI writes:
+Alongside the CLI the package exports an ESM-only JavaScript API, with TypeScript declarations. `lint` runs the same two checks and returns structured results without printing or exiting; `format` turns a result into the console output the CLI writes:
 
 ```js
 import { lint, format } from '@ladamczyk/skillslint';

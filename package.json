@@ -1,12 +1,22 @@
 {
   "name": "@ladamczyk/skillslint",
   "version": "4.2.6",
-  "description": "Linter for agents skills",
+  "description": "Lint and score Agent Skills (SKILL.md) before your agents run them: prose checks plus structure, clarity and specificity scores, with thresholds that fail CI.",
   "keywords": [
     "cli",
     "skillslint",
     "agents",
-    "skills"
+    "agent-skills",
+    "skill.md",
+    "claude-code",
+    "claude-skills",
+    "linter",
+    "textlint",
+    "prompt-quality",
+    "ai-agents",
+    "ci",
+    "quality-gate",
+    "qoq"
   ],
   "homepage": "https://github.com/ladamczyk-it/skillslint",
   "bugs": {
