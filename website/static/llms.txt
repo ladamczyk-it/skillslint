@@ -37,4 +37,4 @@ Usage statistics: opt-in; the answer is stored in `~/.config/skillslint.json` (o
 - [GitHub repository](https://github.com/ladamczyk-it/skillslint): source, issues and CHANGELOG.md
 - [npm package](https://www.npmjs.com/package/@ladamczyk/skillslint): @ladamczyk/skillslint
 - [Author's tools](https://adamczyk.ovh/llms.txt): hub llms.txt listing qoq and its sibling tools
-- [qoq](https://qoq.adamczyk.ovh/): the JavaScript/TypeScript quality suite; enable skillslint with `skillslint: { path }` in qoq.config.js and a failing skill fails `qoq --check`
+- [qoq](https://qoq.adamczyk.ovh/): the JavaScript/TypeScript quality suite that runs skillslint as an optional blocking check of qoq --check (skillslint: { path } in qoq.config.js); details on https://skillslint.adamczyk.ovh/docs/qoq
