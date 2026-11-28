@@ -6,11 +6,25 @@ description: 'The bundled textlint rules for skill Markdown: common misspellings
 keywords: [textlint, write-good, common misspellings, markdown lint, skill prose]
 ---
 
+Skillslint checks the prose of every `.md` file under `--path` with [textlint](https://textlint.org/docs/getting-started) and a bundled configuration. There is no config file to write.
+
+## Which rules are enabled?
+
 The bundled `.textlintrc.json` enables:
 
-- **`common-misspellings`** — catches common spelling errors
-- **`write-good`** — prose checks, with the four noisiest rules switched off (`weasel`, `passive`, `adverb`, `tooWordy`), so what's left is the readability findings worth acting on
+- **`common-misspellings`**: catches common spelling errors, such as `recieve` for `receive`.
+- **`write-good`**: prose checks, with the four noisiest rules switched off (`weasel`, `passive`, `adverb`, `tooWordy`), so what's left is the readability findings worth acting on.
 
-Both plugins (`@textlint/markdown` and `@textlint/text`) are registered for `.md`, so every `.md` file is read twice — once as markdown, once as plain text.
+## Why is every file read twice?
 
-Run with `-f` / `--fix` to let textlint auto-correct issues it can resolve without manual intervention. Skills that fail with `--fix` on report `Can't perform automatic fix!` — those findings need a human.
+Both plugins, `@textlint/markdown` and `@textlint/text`, are registered for `.md`, so every `.md` file is read once as Markdown and once as plain text.
+
+## What does --fix correct?
+
+Run with `-f` or `--fix` to let textlint correct what it can without a human, such as a known misspelling. The fixes are written back to the files.
+
+```bash
+npx @ladamczyk/skillslint --path .claude/skills --fix
+```
+
+When findings remain that textlint can't fix, the output says `Can't perform automatic fix!` and the run exits with `1`. Those findings need a human.
