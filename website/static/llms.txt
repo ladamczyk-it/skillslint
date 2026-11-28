@@ -2,6 +2,8 @@
 
 > Skillslint (@ladamczyk/skillslint) is a CLI and JavaScript API that lints Agent Skills, the SKILL.md folders agents such as Claude Code load as instructions. It runs textlint prose checks and gives each skill 0-100 quality scores (overall, structure, clarity, specificity, advanced) from agent-skills-cli, and fails with exit code 1 when a skill is below the floors you set. It is an optional blocking check inside qoq.
 
+Full docs: https://skillslint.adamczyk.ovh/llms-full.txt (each page also as Markdown at <page URL>.md)
+
 Install and run: `npx @ladamczyk/skillslint`, or `npm install --save-dev @ladamczyk/skillslint`. Needs Node ^22.22.2, ^24.15.0 or >=26 and npm 10+. There is no config file; everything is a CLI flag or a `lint()` option.
 
 Layout: each direct subdirectory of `--path` (default `./skills`, resolved from the current directory) is one skill and is scored as a whole; textlint checks every `.md` file under `--path` at any depth, not only SKILL.md. For Claude Code project skills use `--path .claude/skills`.
@@ -34,4 +36,5 @@ Usage statistics: opt-in; the answer is stored in `~/.config/skillslint.json` (o
 - [Usage statistics](https://skillslint.adamczyk.ovh/docs/usage-statistics): the opt-in prompt and exactly what is sent
 - [GitHub repository](https://github.com/ladamczyk-it/skillslint): source, issues and CHANGELOG.md
 - [npm package](https://www.npmjs.com/package/@ladamczyk/skillslint): @ladamczyk/skillslint
-- [qoq](https://qoq.adamczyk.ovh/): the JavaScript/TypeScript quality suite that can run skillslint
+- [Author's tools](https://adamczyk.ovh/llms.txt): hub llms.txt listing qoq and its sibling tools
+- [qoq](https://qoq.adamczyk.ovh/): the JavaScript/TypeScript quality suite; enable skillslint with `skillslint: { path }` in qoq.config.js and a failing skill fails `qoq --check`
